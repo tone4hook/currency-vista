@@ -11,6 +11,14 @@ module.exports = () => {
     ? 'https://tone4hook.github.io/currency-vista/'
     : 'http://localhost:8080/';
 
+  const currency_converter = isProduction
+    ? 'currency_converter@https://tone4hook.github.io/currency-converter/remoteEntry.js'
+    : 'currency_converter@http://localhost:8081/remoteEntry.js';
+
+  const vista_dictionary = isProduction
+    ? 'vista_dictionary@https://tone4hook.github.io/vista-dictionary/remoteEntry.js'
+    : 'vista_dictionary@http://localhost:8082/remoteEntry.js';
+
   return {
     output: {
       publicPath,
@@ -68,10 +76,8 @@ module.exports = () => {
         name: 'currency_vista',
         filename: 'remoteEntry.js',
         remotes: {
-          currency_converter:
-            'currency_converter@https://tone4hook.github.io/currency-converter/remoteEntry.js',
-          vista_dictionary:
-            'vista_dictionary@https://tone4hook.github.io/vista-dictionary/remoteEntry.js',
+          currency_converter,
+          vista_dictionary,
         },
         exposes: {},
         shared: packageJson.dependencies,
