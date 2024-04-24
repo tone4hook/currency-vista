@@ -7,7 +7,7 @@ const packageJson = require('./package.json');
 
 module.exports = () => ({
   output: {
-    publicPath: 'http://localhost:8080/',
+    publicPath: 'https://tone4hook.github.io/currency-vista/',
   },
 
   resolve: {
@@ -63,9 +63,9 @@ module.exports = () => ({
       filename: 'remoteEntry.js',
       remotes: {
         currency_converter:
-          'currency_converter@http://localhost:8081/remoteEntry.js',
+          'currency_converter@https://tone4hook.github.io/currency-converter/remoteEntry.js',
         vista_dictionary:
-          'vista_dictionary@http://localhost:8082/remoteEntry.js',
+          'vista_dictionary@https://tone4hook.github.io/vista-dictionary/remoteEntry.js',
       },
       exposes: {},
       shared: packageJson.dependencies,
