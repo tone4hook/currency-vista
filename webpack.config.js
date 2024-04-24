@@ -5,8 +5,11 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const packageJson = require('./package.json');
 
-module.exports = () => {
-  const isProduction = process.env.NODE_ENV === 'production';
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === 'production';
+
+  console.log('isProduction', isProduction);
+
   const publicPath = isProduction
     ? 'https://tone4hook.github.io/currency-vista/'
     : 'http://localhost:8080/';
