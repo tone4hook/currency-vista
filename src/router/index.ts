@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../pages/Home.vue';
+import Home from '@/pages/Home.vue';
 const Currency = () => import('currency_converter/Currency');
 const Vista = () => import('vista_dictionary/Vista');
 

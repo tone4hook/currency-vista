@@ -8,8 +8,6 @@ const packageJson = require('./package.json');
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
-  console.log('isProduction', isProduction);
-
   const publicPath = isProduction
     ? 'https://tone4hook.github.io/currency-vista/'
     : 'http://localhost:8080/';
@@ -24,6 +22,7 @@ module.exports = (env, argv) => {
 
   return {
     output: {
+      uniqueName: 'currency_vista',
       publicPath,
     },
 
@@ -34,9 +33,21 @@ module.exports = (env, argv) => {
       },
     },
 
+    optimization: {
+      runtimeChunk: 'single',
+    },
+
     devServer: {
       port: 8080,
       historyApiFallback: true,
+      hot: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods':
+          'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers':
+          'X-Requested-With, content-type, Authorization',
+      },
     },
 
     module: {
@@ -82,8 +93,12 @@ module.exports = (env, argv) => {
           currency_converter,
           vista_dictionary,
         },
-        exposes: {},
-        shared: packageJson.dependencies,
+        exposes: {
+          './ErrorStore': './src/stores/error',
+        },
+        shared: {
+          ...packageJson.dependencies,
+        },
       }),
       new HtmlWebPackPlugin({
         template: './src/index.html',
