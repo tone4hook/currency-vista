@@ -97,7 +97,19 @@ module.exports = (env, argv) => {
           './ErrorStore': './src/stores/error',
         },
         shared: {
-          ...packageJson.dependencies,
+          vue: {
+            singleton: true,
+            requiredVersion: packageJson.dependencies.vue,
+          },
+          'vue-router': {
+            singleton: true,
+            requiredVersion: packageJson.dependencies['vue-router'],
+          },
+          pinia: {
+            singleton: true,
+            requiredVersion: packageJson.dependencies.pinia,
+          },
+          bootstrap: packageJson.dependencies.bootstrap,
         },
       }),
       new HtmlWebPackPlugin({
